@@ -29,9 +29,22 @@
 		573D2A562D47C3A600C0BF70 /* TickyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TickyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		573D2A7C2D47C95D00C0BF70 /* Exceptions for "Ticky" folder in "Ticky" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 573D2A392D47C3A500C0BF70 /* Ticky */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		573D2A3C2D47C3A500C0BF70 /* Ticky */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				573D2A7C2D47C95D00C0BF70 /* Exceptions for "Ticky" folder in "Ticky" target */,
+			);
 			path = Ticky;
 			sourceTree = "<group>";
 		};
@@ -393,12 +406,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ticky/Ticky.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ticky/Preview Content\"";
 				DEVELOPMENT_TEAM = 3DN5WMRWS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ticky/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Cette application utilise vos données de santé pour fournir des statistiques personnalisées.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Cette application met à jour vos données de santé pour suivre vos progrès.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -422,12 +440,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ticky/Ticky.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ticky/Preview Content\"";
 				DEVELOPMENT_TEAM = 3DN5WMRWS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ticky/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Cette application utilise vos données de santé pour fournir des statistiques personnalisées.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Cette application met à jour vos données de santé pour suivre vos progrès.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

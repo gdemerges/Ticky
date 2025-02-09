@@ -7,10 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import HealthKit
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    
+    private let healthStore = HKHealthStore()
 
     var body: some View {
         NavigationSplitView {
@@ -37,6 +40,9 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+        .onAppear {
+                    checkHealthKitAvailability()
+                }
     }
 
     private func addItem() {
@@ -53,6 +59,13 @@ struct ContentView: View {
             }
         }
     }
+    private func checkHealthKitAvailability() {
+            if HKHealthStore.isHealthDataAvailable() {
+                print("HealthKit est disponible")
+            } else {
+                print("HealthKit n'est pas disponible sur cet appareil")
+            }
+        }
 }
 
 #Preview {
