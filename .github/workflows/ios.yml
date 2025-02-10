@@ -34,12 +34,13 @@ jobs:
 
       - name: Récupérer l’UDID du simulateur iPhone 16 Pro
         run: |
-          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep "Shutdown" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
+          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep "OS:18.2" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
           if [[ -z "$UDID" ]]; then
-            echo "Erreur : Aucun simulateur iPhone 16 Pro trouvé."
+            echo "Erreur : Aucun simulateur iPhone 16 Pro sous iOS 18.2 trouvé."
             exit 1
           fi
           echo "UDID=$UDID" >> $GITHUB_ENV
+          echo "UDID sélectionné : $UDID"
 
       - name: Démarrer le simulateur iPhone 16 Pro
         run: |
