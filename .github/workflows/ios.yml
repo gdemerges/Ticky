@@ -19,8 +19,27 @@ jobs:
       - name: Vérifier la version d'Xcode
         run: xcodebuild -version
 
-      - name: Build et Test de l'application
+      - name: Build de l'application
         run: |
           cd ios
-          # Adapte la commande suivante en fonction de ta configuration (workspace, scheme, etc.)
-          xcodebuild -workspace ios/Ticky.xcodeproj/project.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro' clean build
+          xcodebuild -workspace Ticky.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro' clean build
+
+      - name: Lancer les tests
+        run: |
+          cd ios
+          xcodebuild test -workspace Ticky.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
+
+      - name: Sauvegarder le build en artefact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ticky-App
+          path: ios/build/Debug-iphonesimulator/Ticky.app
+
+      - name: Vérifier la qualité du code (SwiftLint)
+        run: |
+          cd ios
+          if which swiftlint > /dev/null; then
+            swiftlint
+          else
+            echo "SwiftLint n'est pas installé"
+          fi
