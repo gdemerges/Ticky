@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'ios/**'
+      - '.github/workflows/**'
   pull_request:
     paths:
       - 'ios/**'
@@ -28,12 +29,6 @@ jobs:
         run: |
           cd ios
           xcodebuild test -workspace Ticky.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
-
-      - name: Sauvegarder le build en artefact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Ticky-App
-          path: ios/build/Debug-iphonesimulator/Ticky.app
 
       - name: Vérifier la qualité du code (SwiftLint)
         run: |
