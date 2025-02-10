@@ -23,4 +23,4 @@ jobs:
         run: |
           cd ios
           # Adapte la commande suivante en fonction de ta configuration (workspace, scheme, etc.)
-          xcodebuild -project Ticky.xcodeproj -scheme TickyApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' build test
+          xcodebuild -workspace ios/Ticky.xcodeproj/project.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro' clean build
