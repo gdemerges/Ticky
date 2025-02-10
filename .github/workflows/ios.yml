@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-14 
 
     steps:
       - name: Checkout du code
@@ -22,28 +22,27 @@ jobs:
 
       - name: Sélectionner Xcode 16.2
         run: |
-            sudo xcode-select -s /Applications/Xcode_16.2.app
-            sudo xcode-select -p
-            xcodebuild -version
-
-      - name: Vérifier la version d'Xcode
-        run: xcodebuild -version
+          sudo xcode-select -s /Applications/Xcode_16.2.app
+          xcodebuild -version
+          sudo xcode-select -p
 
       - name: Vérifier les runtimes iOS disponibles
         run: xcrun simctl list runtimes
 
       - name: Démarrer un simulateur iPhone 16 Pro
         run: |
-          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
+          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep "Shutdown" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
           echo "Utilisation du simulateur avec UDID: $UDID"
           xcrun simctl boot "$UDID"
-          sleep 15
+          sleep 15 
 
-      - name: Build de l'application
+      - name: Vérifier la présence du projet
+        run: |
+          ls -R ios  # Vérifie que Ticky.xcodeproj est bien présent
+
+      - name: Build et Test de l'application
         run: |
           cd ios
-      - name: Récupérer et utiliser l'UDID du simulateur
-        run: |
-            UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
-            echo "Utilisation du simulateur avec UDID: $UDID"
-            xcodebuild -project Ticky.xcodeproj -scheme Ticky -destination "id=$UDID" clean build test
+          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep "Shutdown" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
+          echo "Utilisation du simulateur avec UDID: $UDID"
+          xcodebuild -project Ticky.xcodeproj -scheme Ticky -destination "id=$UDID" clean build test
