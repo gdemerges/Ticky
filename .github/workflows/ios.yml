@@ -18,7 +18,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Sélectionner Xcode 16.2
-        run: sudo xcode-select -s /Applications/Xcode.app
+        run: |
+          sudo xcode-select -s /Applications/Xcode.app
+          xcodebuild -version
 
       - name: Vérifier la version d'Xcode
         run: xcodebuild -version
