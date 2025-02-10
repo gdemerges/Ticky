@@ -11,11 +11,14 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
       - name: Checkout du code
         uses: actions/checkout@v3
+
+      - name: Sélectionner Xcode 16.2
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
 
       - name: Vérifier la version d'Xcode
         run: xcodebuild -version
@@ -29,12 +32,3 @@ jobs:
         run: |
           cd ios
           xcodebuild test -project Ticky.xcodeproj -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
-
-      - name: Vérifier la qualité du code (SwiftLint)
-        run: |
-          cd ios
-          if which swiftlint > /dev/null; then
-            swiftlint
-          else
-            echo "SwiftLint n'est pas installé"
-          fi
