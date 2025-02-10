@@ -22,8 +22,9 @@ jobs:
 
       - name: Sélectionner Xcode 16.2
         run: |
-          sudo xcode-select -s /Applications/Xcode.app
-          xcodebuild -version
+            sudo xcode-select -s /Applications/Xcode_16.2.app
+            sudo xcode-select -p
+            xcodebuild -version
 
       - name: Vérifier la version d'Xcode
         run: xcodebuild -version
