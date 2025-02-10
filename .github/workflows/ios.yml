@@ -31,10 +31,10 @@ jobs:
 
       - name: Démarrer un simulateur iPhone 16 Pro
         run: |
-          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep -oE '[0-9A-F\-]{36}')
+          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
           echo "Utilisation du simulateur avec UDID: $UDID"
           xcrun simctl boot "$UDID"
-          sleep 15  # Donne un délai pour le démarrage
+          sleep 15
 
       - name: Build de l'application
         run: |
