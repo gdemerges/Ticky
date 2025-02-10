@@ -23,12 +23,12 @@ jobs:
       - name: Build de l'application
         run: |
           cd ios
-          xcodebuild -workspace Ticky.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro' clean build
+          xcodebuild -project Ticky.xcodeproj -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro' clean build
 
       - name: Lancer les tests
         run: |
           cd ios
-          xcodebuild test -workspace Ticky.xcworkspace -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
+          xcodebuild test -project Ticky.xcodeproj -scheme Ticky -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
 
       - name: Vérifier la qualité du code (SwiftLint)
         run: |
