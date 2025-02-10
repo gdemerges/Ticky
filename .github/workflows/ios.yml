@@ -29,20 +29,30 @@ jobs:
       - name: Vérifier les runtimes iOS disponibles
         run: xcrun simctl list runtimes
 
-      - name: Démarrer un simulateur iPhone 16 Pro
+      - name: Vérifier les simulateurs disponibles
+        run: xcrun simctl list devices
+
+      - name: Récupérer l’UDID du simulateur iPhone 16 Pro
         run: |
           UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep "Shutdown" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
-          echo "Utilisation du simulateur avec UDID: $UDID"
+          if [[ -z "$UDID" ]]; then
+            echo "Erreur : Aucun simulateur iPhone 16 Pro trouvé."
+            exit 1
+          fi
+          echo "UDID=$UDID" >> $GITHUB_ENV
+
+      - name: Démarrer le simulateur iPhone 16 Pro
+        run: |
+          echo "Démarrage du simulateur avec UDID: $UDID"
           xcrun simctl boot "$UDID"
-          sleep 15 
+          sleep 15
 
       - name: Vérifier la présence du projet
         run: |
-          ls -R ios  # Vérifie que Ticky.xcodeproj est bien présent
+          ls -R ios 
 
       - name: Build et Test de l'application
         run: |
           cd ios
-          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep "Shutdown" | grep -oE '[0-9A-F\-]{36}' | head -n 1)
-          echo "Utilisation du simulateur avec UDID: $UDID"
+          echo "Compilation avec UDID: $UDID"
           xcodebuild -project Ticky.xcodeproj -scheme Ticky -destination "id=$UDID" clean build test
