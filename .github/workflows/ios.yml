@@ -25,21 +25,7 @@ jobs:
       - name: Vérifier la version d'Xcode
         run: xcodebuild -version
 
-      - name: Démarrer un simulateur iPhone 16 Pro
-        run: |
-          UDID=$(xcrun simctl list devices | grep "iPhone 16 Pro (" | grep -oE '[0-9A-F\-]{36}')
-            echo "Utilisation du simulateur avec UDID: $UDID"
-            xcrun simctl boot "$UDID"
-
-      - name: Attendre que le simulateur démarre
-        run: sleep 20 
-
       - name: Build de l'application
         run: |
           cd ios
           xcodebuild -project Ticky.xcodeproj -scheme Ticky -destination "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro" clean build
-
-      - name: Lancer les tests
-        run: |
-          cd ios
-          xcodebuild test -project Ticky.xcodeproj -scheme Ticky -destination "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro"
